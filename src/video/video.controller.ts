@@ -10,3 +10,5 @@ export class VideoController {
     return this.videoService.getVideoDetails(id);
   }
 }
+
+
