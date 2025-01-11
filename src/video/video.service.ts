@@ -56,13 +56,31 @@ export class VideoService {
           'X-Rapidapi-Key': this.apiKey,
         },
       });
-      return response.data;
+  
+      const data = response.data;
+  
+      // Customized response structure
+      return {
+        channelId: data.id,
+        name: data.title,
+        description: data.description,
+        subscriberCount: data.subscriberCount,
+        videoCount: data.videoCount,
+        createdAt: data.publishedAt,
+        bannerImage: data.bannerExternalUrl,
+      };
     } catch (error) {
+      console.error('Error during API call:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+      });
       throw new HttpException(
         error.response?.data || 'Failed to fetch channel details',
         HttpStatus.BAD_REQUEST,
       );
     }
   }
+  
   
 }
