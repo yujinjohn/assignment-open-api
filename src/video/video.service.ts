@@ -45,5 +45,24 @@ export class VideoService {
       );
     }
   }
+
+  async getChannelAbout(channelId: string): Promise<any> {
+    const url = `https://${this.apiHost}/channel/about`;
+    try {
+      const response = await axios.get(url, {
+        params: { id: channelId },
+        headers: {
+          'X-Rapidapi-Host': this.apiHost,
+          'X-Rapidapi-Key': this.apiKey,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw new HttpException(
+        error.response?.data || 'Failed to fetch channel details',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
   
 }

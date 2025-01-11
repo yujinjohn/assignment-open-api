@@ -9,6 +9,12 @@ export class VideoController {
   async getVideoInfo(@Query('id') id: string): Promise<any> {
     return this.videoService.getVideoDetails(id);
   }
+
+  @Get('channel/about')
+async getChannelAbout(@Query('id') id: string): Promise<any> {
+  return this.videoService.getChannelAbout(id);
+}
+
 }
 
 
